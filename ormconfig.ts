@@ -1,5 +1,3 @@
-'use strict'
-
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { config } from 'dotenv';
@@ -15,9 +13,9 @@ const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: false,
   logging: true,
-  entities: ['dist/src/**/*.entity{.ts,.js}'],
+  entities: ['src/**/*.entity{.ts,.js}'],
   migrations: ['migrations/**/*.{ts,js}'],
   subscribers: [],
 });
 
-export default AppDataSource
+export default AppDataSource;
