@@ -42,7 +42,7 @@ start:
 .PHONY: start-prod
 start-prod: build
 	@echo "--- ▶️  Starting application in production mode..."
-	yarn start:prod
+	docker-compose up -d
 
 .PHONY: start-debug
 start-debug:
