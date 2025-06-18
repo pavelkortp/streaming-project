@@ -10,14 +10,12 @@ config();
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => {
-        return {
-          type: 'postgres',
-          ssl: true,
-          url: config.get<string>('DATABASE_URL'),
-          entities: ['../**/*.entity.js'],
-        };
-      },
+      useFactory: (config: ConfigService) => ({
+        type: 'postgres',
+        ssl: true,
+        url: config.get<string>('DATABASE_URL'),
+        entities: ['../**/*.entity.js'],
+      }),
     }),
   ],
 })
