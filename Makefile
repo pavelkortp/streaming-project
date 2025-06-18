@@ -6,9 +6,6 @@ SHELL := /bin/bash
 # Define the node_modules binary directory
 NODE_MODULES_BIN := ./node_modules/.bin
 
-# Define the TypeORM command using ts-node for TypeScript compatibility
-TYPEORM := $(NODE_MODULES_BIN)/typeorm-ts-node-commonjs
-
 # Default command to run when 'make' is called without arguments
 .DEFAULT_GOAL := help
 
@@ -104,7 +101,7 @@ migration-generate:
 .PHONY: migration-run
 migration-run:
 	@echo "--- 🗄️ Running pending database migrations..."
-	$(TYPEORM) migration:run -d ormconfig.ts
+	npx typeorm-ts-node-commonjs migration:run -d ormconfig.ts
 
 .PHONY: migration-revert
 migration-revert:

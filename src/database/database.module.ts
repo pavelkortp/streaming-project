@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { config } from 'dotenv';
+
+config();
 
 @Module({
   imports: [
@@ -8,16 +11,12 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
-        const obj: TypeOrmModuleOptions = {
+        return {
           type: 'postgres',
-          host: config.get<string>('DB_HOST'),
-          port: config.get<number>('DB_PORT'),
-          username: config.get<string>('DB_USER'),
-          password: config.get<string>('DB_PASSWORD'),
-          database: config.get<string>('DB_NAME'),
+          ssl: true,
+          url: config.get<string>('DATABASE_URL'),
+          entities: ['../**/*.entity.js'],
         };
-        console.log(obj);
-        return obj;
       },
     }),
   ],
